@@ -1,0 +1,26 @@
+[
+    {
+        "id": "9948b86d-7fc4-439e-a4dc-bf91b73aa184",
+        "name": "Tech Innovators",
+        "email": "contact@techinnovators.com",
+        "password": "$2b$12$.BVoAa4OopN0NUnUTrQfROcW9WmJXxbhy/5iy6B4/1uh1vG6WVBEq",
+        "photo": "documents/Me.jpeg",
+        "description": "A leading startup driving innovation in AI and blockchain.",
+        "website_link": "https://techinnovators.com",
+        "create_at": "2025-02-03T14:37:09.228303",
+        "update_at": "2025-02-03T14:37:09.229260",
+        "event_id": null
+    },
+    {
+        "id": "049bdaef-54ee-42f4-b91e-734c508f5774",
+        "name": "Remotecoders",
+        "email": "contact@remotecoders.com",
+        "password": "$2b$12$zOsGY1dJB5viQQiM0G8O3ucuP2MiEk21LmLy8yL6Uz31riMlr8KJC",
+        "photo": "documents/Me.jpeg",
+        "description": "Tech company to connect the MENA region to the European tech industry",
+        "website_link": "https://remotecoders.org",
+        "create_at": "2025-02-03T14:39:43.392135",
+        "update_at": "2025-02-03T14:39:43.392143",
+        "event_id": null
+    }
+]

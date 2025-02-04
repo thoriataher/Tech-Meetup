@@ -1,0 +1,39 @@
+from flask import Blueprint, request, jsonify
+from auth.auth_service import AuthService
+from utils.security import SecurityUtils
+
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    required_fields = ["name", "email", "photo", "password", "description", "website_link" ]
+    
+    for field in required_fields:
+        if not data.get(field):
+            return jsonify({"error": f"{field} is required"}), 400
+    
+    response, status = AuthService.register_company(
+        name=data["name"],
+        email=data["email"],
+        password=data["password"],
+        photo=data["photo"],
+        description=data["description"],
+        website_link=data["website_link"],
+        event_id=data.get("event_id")
+    )
+    return jsonify(response), status
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+    
+    response, status = AuthService.login_company(email, password)
+    return jsonify(response), status
+
+@auth_bp.route("/logout", methods=["POST"])
+def logout():
+    SecurityUtils.logout_user()
+    return {"message": "User logout successfully"}, 200
