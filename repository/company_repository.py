@@ -43,8 +43,4 @@ class CompanyRepository:
             companies.append(company_data)
         return CompanyRepository.save_companies(companies)
             
-    @staticmethod
-    def delete_company(company_id):
-        companies = CompanyRepository.load_companies()
-        new_companies = [company for company in companies if company["id"] != company_id]
-        return CompanyRepository.save_companies(new_companies)
+    
