@@ -6,7 +6,7 @@ from models.company import Company
 class AuthService:
     
     @staticmethod
-    def register_company(name, email, password, photo, description, website_link, event_id=None):
+    def register_company(name, email, password, photo, description, website_link):
         email_validation = AuthValidation.validate_email(email)
         if not email_validation["valid"]:
             return {"error": email_validation["error"]}, 400 
@@ -20,7 +20,7 @@ class AuthService:
         
         hashed_password = SecurityUtils.hash_password(password)
         
-        new_company = Company(name, email, hashed_password, photo, description, website_link, event_id)
+        new_company = Company(name, email, hashed_password, photo, description, website_link)
         companies = CompanyRepository.load_companies()
         companies.append(new_company.__dict__)
         CompanyRepository.save_companies(companies)

@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from auth.auth_service import AuthService
 from utils.security import SecurityUtils
 
-auth_bp = Blueprint("auth", __name__)
+auth_bp = Blueprint("auth", __name__, url_prefix="/")
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
@@ -19,8 +19,7 @@ def register():
         password=data["password"],
         photo=data["photo"],
         description=data["description"],
-        website_link=data["website_link"],
-        event_id=data.get("event_id")
+        website_link=data["website_link"]
     )
     return jsonify(response), status
 
