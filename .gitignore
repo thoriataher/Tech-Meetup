@@ -2,4 +2,7 @@
 .env
 __pycache__
 sessions/
+<<<<<<< Updated upstream
 /data
+=======
+>>>>>>> Stashed changes
