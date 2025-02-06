@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMeetup|Sign up</title>
+    <link rel="shortcut icon" href="../static/images/TechMeetup.jpeg" />
+    <link rel="stylesheet" href="../static/css/auth.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="">
+            <div class="logo">TechMeetup</div>
+            <h1>Welcome to TechMeetup</h1>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="name">Company Name</label>
+                <input type="text" id="name" placeholder="Enter Company name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="password" placeholder="Enter password">
+                    <button type="button" class="password-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" id="description" placeholder="Enter Description">
+            </div>
+            <div class="form-group">
+                <label for="company_site">Company Site</label>
+                <input type="text" id="company_site" placeholder="Enter Company Site">
+            </div>
+            <button type="submit" class="login-button">Sign Up</button>
+        </form>
+        <p class="signup-text">
+            Already have an account? <a href="login.html">Login</a>
+        </p>
+    </div>
+</body>
+
+</html>
