@@ -7,7 +7,6 @@
     <title>TechMeetup|login</title>
     <link rel="shortcut icon" href="../static/images/TechMeetup.jpeg" />
     <link rel="stylesheet" href="../static/css/auth.css">
-    <script defer src="../static/js/auth.js"></script>
 </head>
 <body>
     <main>
@@ -16,15 +15,17 @@
                 <div class="logo"> <a href="home.html">TechMeetup</a></div>
                 <h1>Welcome back to TechMeetup</h1>
             </div>
-            <form>
+            <form id="login-form">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter email">
+                    <p class="hidden" id="email-err">valid email is required</p>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="password-input-wrapper">
                         <input type="password" id="password" placeholder="Enter password" data-target="password">
+                        <p class="hidden" id="pass-err">password is required</p>
                         <button type="button" class="password-toggle" id="togglePassword" data-target="password">
                             <svg id="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -38,5 +39,6 @@
             </form>
         </div>
     </main>
+    <script type="module" src="/static/js/login.js"></script>
 </body>
 </html>

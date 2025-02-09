@@ -120,3 +120,6 @@ h1 {
     color: #666;
     cursor: pointer;
 }
+.hidden{
+    display: none;
+}
