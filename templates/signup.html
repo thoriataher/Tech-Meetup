@@ -10,11 +10,10 @@
 </head>
 
 <body>
+    <main>
     <div class="container">
-        <div class="">
-            <div class="logo">TechMeetup</div>
+            <div class="logo"> <a href="home.html">TechMeetup</a></div>
             <h1>Welcome to TechMeetup</h1>
-        </div>
         <form>
             <div class="form-group">
                 <label for="name">Company Name</label>
@@ -32,7 +31,7 @@
                 <label for="password">Password</label>
                 <div class="password-input-wrapper">
                     <input type="password" id="password" placeholder="Enter password">
-                    <button type="button" class="password-toggle">
+                    <button type="button" class="password-toggle" data-target="password">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -44,8 +43,8 @@
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
                 <div class="password-input-wrapper">
-                    <input type="password" id="password" placeholder="Confirm password">
-                    <button type="button" class="password-toggle">
+                    <input type="password" id="confirm-password" placeholder="Confirm password" >
+                    <button type="button" class="password-toggle" data-target="confirm-password">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -57,6 +56,7 @@
             <button type="submit" class="submit-button">Register</button>
         </form>
     </div>
+</main>
+<script src="../static/js/auth.js"></script>
 </body>
-
 </html>
