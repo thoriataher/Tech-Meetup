@@ -10,6 +10,8 @@ class SecurityUtils:
     @staticmethod
     def check_password(password, hash_password):
         return bcrypt.checkpw(password.encode("utf-8"), hash_password.encode("utf-8"))
+         
+        
     
     @staticmethod
     def login_user(company):

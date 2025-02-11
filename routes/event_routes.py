@@ -12,7 +12,7 @@ def get_all_events():
 
 @event_bp.route("/<event_id>", methods=["GET"])
 def get_event_by_id(event_id):
-    event = EventRepository.find_event(event_id)
+    event = EventService.get_event_by_id(event_id)
     if event:
         return jsonify(event), 200
     else:
