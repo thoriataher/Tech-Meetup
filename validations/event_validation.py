@@ -19,15 +19,10 @@ class EventValidation:
         if not event_data.get("company_id"):
             errors["company_id"] = "Company ID is required"
             
-        if event_data.get("event_type") not in ["online", "offline", "hybrid"]:
-            errors["event_type"] = "Event type must be 'online', 'offline', or 'hybrid'"
+        if event_data.get("eventType") not in ["online", "offline", "hybrid"]:
+            errors["eventType"] = "Event type must be 'online', 'offline', or 'hybrid'"
             
-        if not event_data.get("company_logo_url"):
-            errors["company_logo_url"] = "Company logo URL is required"
-            
-        try:
-            datetime.strptime(event_data["date_time"], "%Y-%m-%dT%H:%M:%S")
-        except ValueError:
-            errors["date_time"] = "Invalid date and time format. Use 'YYYY-MM-DD, HH:MM:SS'"
-            
+        if not event_data.get("logoUrl"):
+            errors["logoUrl"] = "Company logo URL is required"
+                
         return errors if errors else None

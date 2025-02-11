@@ -7,42 +7,41 @@ from services.event_service import EventService
 company_bp = Blueprint("company", __name__)
 
 @company_bp.route("/<company_id>/events", methods=["POST"])
-def create_event(company_id):
-    if not CompanyService.is_authorized(company_id, session.get("company_id")):
-        return jsonify({"error": {"Unauthorized access": "You are not authorized to access this resource"}}), 401
-    
+def create_event(company_id):    
     data = request.get_json()
-    required_fields = ["title", "description", "location", "date_time", "company_logo_url", "event_type"]
+    required_fields = ["title", "description", "location", "date_time", "logoUrl", "eventType"]
     
     for field in required_fields:
         if not data.get(field):
             return jsonify({"error": f"{field} is required"}), 400
     
-    new_event = EventService.create_event(data, company_id)
+    if EventRepository.event_exist(data["title"], data["date_time"]):
+        return jsonify({"error": {"Event already exists": f"{data['title']} at {data['date_time']}"}}), 409
     
-    if isinstance(new_event, tuple):  # Handle error response from service
-        return jsonify(new_event[0]), new_event[1]
+    new_event = EventService.create_event(company_id, data)
 
     return jsonify(new_event), 201
 
+@company_bp.route("/<company_id>/events", methods=["GET"])
+def get_company_events(company_id):
+    events = EventService.get_events_by_company_id(company_id)
+    if events is not None:
+        return jsonify(events), 200
+    else:
+        return jsonify({"error": "No events found for this company"}), 404
+    
 
 @company_bp.route("/<company_id>/events/<event_id>", methods=["PUT"])
 def update_company_events(company_id, event_id):
-    if not CompanyService.is_authorized(company_id, session.get("company_id")):
-        return jsonify({"error": {"Unauthorized access": "You are not authorized to access this resource"}}), 401
-    
     data = request.get_json()
-    updated_event = EventRepository.update_event(event_id, data)
+    updated_event = EventService.update_event(event_id, data)
     
-    if updated_event:
+    if not updated_event['error']:
         return jsonify({"message": "Event updated successfully", "event": updated_event}), 200
     return jsonify({"error": "Failed to update event"}), 500
 
 @company_bp.route("/<company_id>/events/<event_id>", methods=["DELETE"])
 def delete_company_event(company_id, event_id):
-    if not CompanyService.is_authorized(company_id, session.get("company_id")):
-        return jsonify({"error": {"Unauthorized access": "You are not authorized to access this resource"}}), 401
-    
-    if EventRepository.delete_event(event_id):
+    if EventService.delete_event(event_id):
         return jsonify({"message": "Event deleted successfully."}), 200
     return jsonify({"error": "Failed to delete the event"}), 500

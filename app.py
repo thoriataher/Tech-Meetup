@@ -13,7 +13,7 @@ Session(app)
 CORS(app, supports_credentials=True, methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  origins=['http://127.0.0.1:5500/', '*'])
 
 
-app.register_blueprint(auth_bp, url_prefix="/api/v1/companies")
+app.register_blueprint(auth_bp, url_prefix="/api/v1/auth")
 app.register_blueprint(company_bp, url_prefix="/api/v1/company")
 app.register_blueprint(event_bp, url_prefix="/api/v1/events")
 

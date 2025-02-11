@@ -1,41 +1,59 @@
-'use strict';
+import { loginUser } from "./apis.js";
+function showError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+}
 
-import { loginuser } from "./apiFunctios.js";
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error-message, #email-err, #pass-err');
+    errorElements.forEach(element => {
+        element.textContent = '';
+        element.classList.add('hidden');
+    });
+}
 
-const loginForm=document.getElementById('login-form')
-const emailInput=document.getElementById('email')
-const passwordInput=document.getElementById('password')
-const emailerror=document.getElementById('email-err')
-const passwordError=document.getElementById('pass-err')
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+document.getElementById('login-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    clearErrors();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-loginForm.addEventListener('submit',async(e) => {
-    e.preventDefault();
-    let formIsValid = true;
-    if(!emailInput.value){
-        emailerror.classList.remove('hidden')
-        formIsValid=false;
-        return;
-    }else if(emailInput.value||!emailPattern.test(emailInput.value)){
-        emailerror.classList.add('hidden')
-        formIsValid=true;
+    let isValid = true;
+
+    if (email === '') {
+        showError('email-error', 'Email is required');
+        isValid = false;
+        return
+    } else if (!validateEmail(email)) {
+        showError('email-error', 'Invalid email format');
+        isValid = false;
+        return
     }
-    if(!passwordInput.value){
-        passwordError.classList.remove('hidden')
-        formIsValid=false;
-        return;
-    }else if(passwordInput.value){
-        passwordError.classList.add('hidden')
-        formIsValid=true;
+    if (password === '') {
+        showError('password-error', 'Password is required');
+        isValid = false;
+        return
     }
-    if(formIsValid){
-        const loginValues={
-            email: emailInput.value,
-            password: passwordInput.value
+    if (email && validateEmail(email) && password) {
+        isValid = true
+    }
+
+    if (isValid) {
+        const loginData = { email, password }
+        const result = await loginUser(loginData)
+        if (result.company_id) {
+            localStorage.setItem('company_id', result.company_id);
         }
-
-            
-        const result=await loginuser(loginValues)
-        console.log(result)
+        if (result?.message) {
+            window.location.href = 'dashboard.html'
+        } else {
+            showError('form-error', result?.error || 'invalid email or password')
+        }
     }
 });
+

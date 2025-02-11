@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session 
 from auth.auth_service import AuthService
 from utils.security import SecurityUtils
 
@@ -7,7 +7,7 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/")
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
-    required_fields = ["name", "email", "photo", "password", "description", "website_link" ]
+    required_fields = ["name", "email", "logo_url", "password"]
     
     for field in required_fields:
         if not data.get(field):
@@ -17,9 +17,7 @@ def register():
         name=data["name"],
         email=data["email"],
         password=data["password"],
-        photo=data["photo"],
-        description=data["description"],
-        website_link=data["website_link"]
+        logo_url=data["logo_url"],
     )
     return jsonify(response), status
 

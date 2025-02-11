@@ -30,8 +30,10 @@ class CompanyRepository:
     @staticmethod
     def find_by_email(email):
         companies = CompanyRepository.load_companies()
-        return next((company for company in companies if company["email"].strip().lower() == email.strip().lower()), None)
-    
+        try:
+            return next((company for company in companies if company["email"].strip().lower() == email.strip().lower()), None)
+        except:
+            pass
     @staticmethod
     def save_company(company_data):
         companies = CompanyRepository.load_companies()
