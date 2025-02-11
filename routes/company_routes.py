@@ -36,7 +36,7 @@ def update_company_events(company_id, event_id):
     data = request.get_json()
     updated_event = EventService.update_event(event_id, data)
     
-    if not updated_event['error']:
+    if updated_event:
         return jsonify({"message": "Event updated successfully", "event": updated_event}), 200
     return jsonify({"error": "Failed to update event"}), 500
 

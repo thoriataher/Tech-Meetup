@@ -107,7 +107,7 @@ export const getEvents = async function (company_id) {
     }
 }
 
-export const updateEvent = async function (company_id, event_id) {
+export const updateEvent = async function (company_id, event_id, eventData) {
     try {
         company_id = localStorage.getItem('company_id');
         if (!company_id) {
@@ -117,7 +117,8 @@ export const updateEvent = async function (company_id, event_id) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(eventData)
         })
         const result = await response.json();
         if (!response.ok) {

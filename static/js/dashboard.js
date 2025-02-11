@@ -89,7 +89,17 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (isValid) {
             if (isEditing && currentEventCard) {
                 // Update the event
-                const updateCard = await updateEvent(company_id, currentEventCard.id);
+                const eventType = eventTypeElement.value;
+                const eventData = {
+                    company_id: company_id,
+                    logoUrl,
+                    title,
+                    description,
+                    location,
+                    date_time,
+                    eventType
+                };
+                const updateCard = await updateEvent(company_id, currentEventCard.id, eventData);
                 if (updateCard?.message) {
                     updateEventCard(updateCard);
                     window.location.href = 'dashboard.js';

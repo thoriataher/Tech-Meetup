@@ -60,7 +60,13 @@ class EventRepository:
 
         for i, event in enumerate(events):
             if event["id"] == event_id:
-                events[i] = updated_event
+                events[i]["logoUrl"] = updated_event["logoUrl"]
+                events[i]["title"] = updated_event["title"]
+                events[i]["description"] = updated_event["description"]
+                events[i]["location"] = updated_event["location"]
+                events[i]["date_time"] = updated_event["date_time"]
+                events[i]["eventType"] = updated_event["eventType"]
+                
                 if EventRepository.save_events(events):
                     return events[i]
         return {"error": "Faild to update event"}
