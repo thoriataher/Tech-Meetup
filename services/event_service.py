@@ -41,7 +41,7 @@ class EventService:
         else:
             updated_event = updated_data
             updated_events= EventRepository.update_event(event_id, updated_event)
-            return updated_events if not updated_events['error'] else {"error": {"Failed to update the event": event_id}}, 500
+            return updated_events if updated_events else {"error": {"Failed to update the event": event_id}}, 500
 
             
         
