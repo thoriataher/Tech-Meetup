@@ -107,7 +107,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                     date_time,
                     eventType
                 };
-                console.log(eventData);
                 
 
                 const result = await createEvent(company_id, eventData);
@@ -148,7 +147,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             </div>
         `;
 
-        console.log( date_time)
         eventsGrid.appendChild(eventCard);
         addEventActions(eventCard);
 
@@ -170,7 +168,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         const deleteButton = eventCard.querySelector('#delete-button');
         deleteButton.addEventListener('click', function (e) {
             const company_id = localStorage.getItem('company_id');
-            console.log(eventCard.id)
             deleteEvent(company_id, eventCard.id)
 
         });
@@ -183,7 +180,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         editButton.addEventListener('click', function () {
             isEditing = true;
             currentEventCard = eventCard;
-            console.log(eventCard);
 
             document.getElementById('logoUrl').value = eventCard.querySelector('.company-card-logo img').src;
             document.getElementById('title').value = eventCard.querySelector('#event-title').textContent;
@@ -213,7 +209,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     async function loadEvents() {
         const company_id = localStorage.getItem('company_id');
-        console.log(company_id);
         if (!company_id) {
             console.error('Company ID not found. Please log in again.');
             window.location.href = 'login.html';

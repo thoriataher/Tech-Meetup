@@ -42,10 +42,8 @@ export const loginUser = async (loginValues) => {
             )
         })
         const result = await response.json();
-        console.log(result)
         if (result.company_id) {
             const session = localStorage.setItem('company_id', result.company_id);
-            console.log(session)
         }
         if (result.company_id) {
             localStorage.setItem('company_id', result.id);
@@ -62,7 +60,6 @@ export const loginUser = async (loginValues) => {
 
 
 export const createEvent = async (company_id, eventData) => {
-    console.log(eventData);
     try {
         company_id = localStorage.getItem('company_id');
         if (!company_id) {
@@ -77,7 +74,6 @@ export const createEvent = async (company_id, eventData) => {
                 eventData
             )
         })
-        console.log(response);  
         const result = await response.json();
         if (!response.ok) {
             throw new Error(response.error || 'something went wrong');
